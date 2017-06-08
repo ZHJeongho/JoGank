@@ -1,6 +1,7 @@
 package com.jeongho.jogank;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,5 +91,27 @@ public class HeaderRecyclerAdapter<T> extends RecyclerView.Adapter<HeaderRecycle
 
 
         return position == 0 ? HEAD_TYPE : CONTENT_TYPE;
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        //判断LayoutManager
+
+        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+        if (layoutManager instanceof GridLayoutManager){
+            GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int i) {
+
+                    if (i == 0){
+                        return 1;
+                    }
+                    return 5;
+                }
+            });
+        }
+
+        super.onAttachedToRecyclerView(recyclerView);
     }
 }
