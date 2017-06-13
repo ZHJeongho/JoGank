@@ -1,5 +1,7 @@
 package com.jeongho.jogank;
 
+
+import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -20,5 +22,6 @@ public interface GankApi {
 //    Call<String> getSortData(@Path("type") String type, @Path("count") int count);
 
     @GET("data/福利/{count}/{page}")
-    Call<ResponseBody> getFuli(@Path("count") int count, @Path("page") int page);
+    Observable<ResponseBody> getFuli(@Path("count") int count, @Path("page") int page);
+
 }
